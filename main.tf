@@ -8,16 +8,16 @@ terraform {
 }
 
 provider "google" {
-  credentials = file("./keys/creds.json")
-  project     = "first-planet-411908"
-  region      = "us-central1"
+  credentials = file(var.credentials_file)
+  project     = var.project
+  region      = var.region
 }
 
 resource "google_storage_bucket" "demo-bucket" {
-  name          = "first-planet-411908-demo-bucket"
-  location      = "US"
+  name          = var.gcs_bucket_name
+  location      = var.location
   force_destroy = true
-
+  storage_class = var.gcs_storage_class
   lifecycle_rule {
     condition {
       age = 1
@@ -26,4 +26,8 @@ resource "google_storage_bucket" "demo-bucket" {
       type = "AbortIncompleteMultipartUpload"
     }
   }
+}
+
+resource "google_bigquery_dataset" "demo-dataset" {
+  dataset_id = var.bq_dataset_name
 }

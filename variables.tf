@@ -3,32 +3,73 @@ variable "credentials_file" {
   default     = "./keys/creds.json"
   
 }
-variable "project" {
-  default     = "first-planet-411908"
-  description = "Project ID"
+
+variable "app_name" {
+  type        = string
+  description = "Application Name"
+  default     = "mage-data-prep"
 }
-variable "location" {
-  default     = "US"
-  description = "Project Location"
+
+variable "container_cpu" {
+  description = "Container cpu"
+  default     = "2000m"
+}
+
+variable "container_memory" {
+  description = "Container memory"
+  default     = "2G"
+}
+
+variable "project_id" {
+  type        = string
+  description = "The name of the project"
+  default     = "first-planet-411908"
 }
 
 variable "region" {
-  default     = "us-central1"
-  description = "Project Region"
+  type        = string
+  description = "The default compute region"
+  default     = "us-west2"
 }
 
-variable "bq_dataset_name" {
-  description = "Bigquery dataset name"
-  default     = "demo_dataset"
+variable "zone" {
+  type        = string
+  description = "The default compute zone"
+  default     = "us-west2-a"
 }
 
-variable "gcs_storage_class" {
-  description = "value of storage class"
-  default     = "STANDARD"
+variable "repository" {
+  type        = string
+  description = "The name of the Artifact Registry repository to be created"
+  default     = "mage-data-prep"
 }
 
-variable "gcs_bucket_name" {
-  description = "GCS bucket name"
-  default     = "first-planet-411908-demo-bucket"
+variable "database_user" {
+  type        = string
+  description = "The username of the Postgres database."
+  default     = "mageuser"
+}
 
+variable "database_password" {
+  type        = string
+  description = "The password of the Postgres database."
+  sensitive   = true
+}
+
+variable "docker_image" {
+  type        = string
+  description = "The docker image to deploy to Cloud Run."
+  default     = "mageai/mageai:latest"
+}
+
+variable "domain" {
+  description = "Domain name to run the load balancer on. Used if `ssl` is `true`."
+  type        = string
+  default     = ""
+}
+
+variable "ssl" {
+  description = "Run load balancer on HTTPS and provision managed certificate with provided `domain`."
+  type        = bool
+  default     = false
 }

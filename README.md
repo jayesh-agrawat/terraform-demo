@@ -20,6 +20,13 @@ This repository contains a demo of a Terraform project
 - `main.tf`: This is the main file where the resources are defined.
 - `variables.tf`: This file defines the variables used in the project.
 
+## Permission for Mage Setup on GCP
+- Artifact Registry Reader
+- Artifact Registry Writer
+- Cloud Run Developer
+- Cloud SQL Admin
+- Service Account Token Creator
+
 
 ## Usage
 
